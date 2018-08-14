@@ -20,8 +20,3 @@
 .table-row-cell:selected > .table-cell > .icon, .table-row-cell:pressed > .table-cell > .icon {
    -fx-fill: white;
 }
-
-.dialog-pane *.button-bar {
-	-fx-max-height: 0;
-	-fx-pref-height: 0;
-}

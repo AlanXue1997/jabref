@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonType?>
 <?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DialogPane?>
@@ -35,8 +36,6 @@
               <buttons>
                   <Label fx:id="loadingLabel" maxHeight="30.0" text="%Loading built in lists" ButtonBar.buttonData="LEFT" ButtonBar.buttonUniformSize="false" />
                   <ProgressIndicator fx:id="progressIndicator" maxHeight="30.0" opacity="0.4" ButtonBar.buttonData="LEFT" ButtonBar.buttonUniformSize="false" />
-                <Button fx:id="cancelButton" cancelButton="true" mnemonicParsing="false" onAction="#closeDialog" text="%Cancel" ButtonBar.buttonData="CANCEL_CLOSE" />
-                  <Button fx:id="saveButton" defaultButton="true" mnemonicParsing="false" onAction="#saveAbbreviationsAndCloseDialog" text="%Save changes" ButtonBar.buttonData="OK_DONE" />
               </buttons>
             </ButtonBar>
          </bottom>
@@ -62,4 +61,6 @@
          </children>
       </HBox>
    </header>
+    <ButtonType fx:id="saveButton" text="%Save" buttonData="OK_DONE"/>
+    <ButtonType fx:constant="CANCEL"/>
 </DialogPane>

@@ -5,6 +5,7 @@ import javax.inject.Inject;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressIndicator;
@@ -13,11 +14,11 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
-import javafx.stage.Stage;
 
 import org.jabref.gui.DialogService;
 import org.jabref.gui.icon.IconTheme;
 import org.jabref.gui.util.BaseDialog;
+import org.jabref.gui.util.ControlHelper;
 import org.jabref.gui.util.TaskExecutor;
 import org.jabref.gui.util.ValueTableCellFactory;
 import org.jabref.logic.journals.JournalAbbreviationLoader;
@@ -39,7 +40,7 @@ public class ManageJournalAbbreviationsView extends BaseDialog<Void> {
     @FXML private TableColumn<AbbreviationViewModel, String> journalTableAbbreviationColumn;
     @FXML private TableColumn<AbbreviationViewModel, Boolean> journalTableEditColumn;
     @FXML private TableColumn<AbbreviationViewModel, Boolean> journalTableDeleteColumn;
-    @FXML private Button cancelButton;
+    @FXML private ButtonType saveButton;
     @FXML private ComboBox<AbbreviationsFileViewModel> journalFilesBox;
     @FXML private Button addJournalFileButton;
     @FXML private Button addNewJournalFileButton;
@@ -57,6 +58,8 @@ public class ManageJournalAbbreviationsView extends BaseDialog<Void> {
         ViewLoader.view(this)
                   .load()
                   .setAsDialogPane(this);
+
+        ControlHelper.setAction(saveButton, getDialogPane(), event -> saveAbbreviationsAndCloseDialog());
     }
 
     @FXML
@@ -186,12 +189,6 @@ public class ManageJournalAbbreviationsView extends BaseDialog<Void> {
     }
 
     @FXML
-    private void closeDialog() {
-        Stage stage = (Stage) cancelButton.getScene().getWindow();
-        stage.close();
-    }
-
-    @FXML
     private void saveAbbreviationsAndCloseDialog() {
         Task<Void> task = new Task<Void>() {
 
@@ -202,7 +199,7 @@ public class ManageJournalAbbreviationsView extends BaseDialog<Void> {
             }
         };
         new Thread(task).start();
-        closeDialog();
+        this.close();
     }
 
 
